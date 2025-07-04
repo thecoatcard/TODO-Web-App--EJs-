@@ -1,13 +1,13 @@
-// C:\Users\...\Node js\services\mailer.js
+
 
 const nodemailer = require('nodemailer');
 
-// Create a transporter object using environment variables
+
 const transporter = nodemailer.createTransport({
-    service: process.env.EMAIL_SERVICE || 'gmail', // e.g., 'gmail', 'outlook'
+    service: process.env.EMAIL_SERVICE || 'gmail',
     auth: {
-        user: process.env.EMAIL_USER, // Your email address
-        pass: process.env.EMAIL_PASS, // Your email password or app-specific password
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
     },
 });
 
@@ -19,10 +19,10 @@ const transporter = nodemailer.createTransport({
  * @returns {string} The full HTML email.
  */
 const getHtmlTemplate = (title, content, button = '') => {
-    // Pastel theme colors
+
     const colors = {
-        primary: '#A78BFA', // Lavender
-        background: '#F3F4F6', // Cool Gray
+        primary: '#A78BFA',
+        background: '#F3F4F6',
         text: '#374151',
         card: '#FFFFFF',
     };

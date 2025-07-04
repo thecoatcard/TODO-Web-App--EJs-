@@ -1,9 +1,6 @@
-/* public/style.css */
-
-/* --- MODERN FONT --- */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-/* --- KEYFRAME ANIMATIONS --- */
+
 @keyframes fadeIn {
     from {
         opacity: 0;

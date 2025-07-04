@@ -1,12 +1,12 @@
-// models/User.js
+
 
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true, lowercase: true },
-    password: { type: String }, // No longer required
+    password: { type: String }, 
     displayName: { type: String, required: true },
-    googleId: { type: String, unique: true, sparse: true }, // Add this field
+    googleId: { type: String, unique: true, sparse: true }, 
     isVerified: { type: Boolean, default: false },
     otp: String,
     otpExpires: Date,

@@ -1,4 +1,3 @@
-// models/Task.js
 
 const mongoose = require('mongoose');
 
@@ -12,6 +11,6 @@ const taskSchema = new mongoose.Schema({
         ref: 'User',
         required: true
     }
-}, { timestamps: true }); // Use timestamps for creation/update dates
+}, { timestamps: true }); 
 
 module.exports = mongoose.model('Task', taskSchema);

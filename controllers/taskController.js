@@ -1,10 +1,6 @@
-// controllers/taskController.js
-
 const Task = require('../models/Task');
 const asyncHandler = require('../middleware/asyncHandler');
 
-// @desc    Display all tasks for the logged-in user
-// @route   GET /
 exports.displayTasks = asyncHandler(async (req, res) => {
     let query = { owner: req.user.id };
     const { search } = req.query;
@@ -17,9 +13,6 @@ exports.displayTasks = asyncHandler(async (req, res) => {
     const tasks = await Task.find(query).sort({ status: 1, deadline: 1 });
     res.render('index', { tasks, search: search || '' });
 });
-
-// @desc    Get details for a single task
-// @route   GET /task/:id
 exports.getTaskDetails = asyncHandler(async (req, res) => {
     const task = await Task.findOne({ _id: req.params.id, owner: req.user.id });
     if (!task) {
@@ -28,9 +21,6 @@ exports.getTaskDetails = asyncHandler(async (req, res) => {
     }
     res.render('task-detail', { task });
 });
-
-// @desc    Create a new task
-// @route   POST /submit
 exports.createTask = asyncHandler(async (req, res) => {
     const { title, description, deadline } = req.body;
     if (!title || !description || !deadline) {
@@ -41,9 +31,6 @@ exports.createTask = asyncHandler(async (req, res) => {
     req.flash('success', 'Task Added Successfully');
     res.redirect('/');
 });
-
-// @desc    Update a task's status
-// @route   POST /status/:id
 exports.updateTaskStatus = asyncHandler(async (req, res) => {
     const task = await Task.findOne({ _id: req.params.id, owner: req.user.id });
     if (task) {
@@ -54,8 +41,7 @@ exports.updateTaskStatus = asyncHandler(async (req, res) => {
     res.redirect(req.get('referer') || '/'); // Redirect back to the previous page
 });
 
-// @desc    Show delete confirmation page
-// @route   GET /delete/:id
+
 exports.getDeleteConfirmation = asyncHandler(async (req, res) => {
     const task = await Task.findOne({ _id: req.params.id, owner: req.user.id });
     if (!task) {
@@ -65,8 +51,6 @@ exports.getDeleteConfirmation = asyncHandler(async (req, res) => {
     res.render('delete-confirm', { task });
 });
 
-// @desc    Delete a task
-// @route   POST /delete/:id
 exports.deleteTask = asyncHandler(async (req, res) => {
     const result = await Task.findOneAndDelete({ _id: req.params.id, owner: req.user.id });
     if (!result) {

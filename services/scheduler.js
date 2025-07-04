@@ -1,11 +1,8 @@
-// services/scheduler.js
-
 const cron = require('node-cron');
 const Task = require('../models/Task');
 const { transporter, getHtmlTemplate } = require('./mailer');
 
 const startScheduler = () => {
-    // Runs every day at 9:00 AM India Standard Time
     cron.schedule('0 9 * * *', async () => {
         console.log('Running daily check for task deadlines...');
         try {

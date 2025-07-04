@@ -1,10 +1,8 @@
-// config/passport-setup.js
-
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
-const User = require('../models/User');
+// const User = require('../models/User');
 
 passport.serializeUser((user, done) => {
     done(null, user.id);
@@ -19,11 +17,11 @@ passport.deserializeUser(async (id, done) => {
     }
 });
 
-// --- Google OAuth Strategy with Account Merging ---
+
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    // Use the full, dynamic URL for production
+    
     callbackURL: `${process.env.APP_URL}/auth/google/callback`
 }, async (accessToken, refreshToken, profile, done) => {
     try {
@@ -32,19 +30,19 @@ passport.use(new GoogleStrategy({
             return done(null, existingUserByGoogleId);
         }
 
-        // Look for user by email to link accounts
+        
         const userEmail = profile.emails[0].value;
         const existingUserByEmail = await User.findOne({ email: userEmail });
 
         if (existingUserByEmail) {
-            // If user exists with email, link their Google ID
+            
             existingUserByEmail.googleId = profile.id;
-            existingUserByEmail.isVerified = true; // Ensure they are marked as verified
+            existingUserByEmail.isVerified = true; 
             await existingUserByEmail.save();
             return done(null, existingUserByEmail);
         }
 
-        // If no user exists at all, create a new one
+        
         const newUser = new User({
             googleId: profile.id,
             displayName: profile.displayName,
@@ -60,7 +58,7 @@ passport.use(new GoogleStrategy({
 }));
 
 
-// --- Local Strategy (include for completeness) ---
+
 passport.use(new LocalStrategy({ usernameField: 'email' }, async (email, password, done) => {
     try {
         const user = await User.findOne({ email: email.toLowerCase() });
