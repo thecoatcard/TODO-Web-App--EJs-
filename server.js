@@ -14,7 +14,7 @@ const { notFound, errorHandler } = require('./middleware/errorMiddleware');
 
 // --- Initial Setup ---
 const app = express();
-app.set('trust proxy', 1); // <-- ADD THIS LINE
+app.set('trust proxy', 1); // <-- THIS LINE IS THE FIX
 connectDB(); // Connect to MongoDB
 require('./config/passport-setup'); // Configure Passport strategies
 
