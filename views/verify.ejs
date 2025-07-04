@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Verify OTP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        body { font-family: 'Inter', sans-serif; }
+        .fade-in { animation: fadeIn 0.5s ease-out forwards; }
+        .themed-input { background-color: #F9FAFB !important; color: #1F2937 !important; border: 1px solid #D1D5DB !important; transition: all 0.3s ease; }
+        .themed-input::placeholder { color: #9CA3AF; }
+        .themed-input:focus { outline: none !important; box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.4); border-color: #A78BFA !important; }
+    </style>
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    
+    /* Simple fade-in animation */
+    @keyframes fadeIn { 
+        from { opacity: 0; transform: translateY(-10px); } 
+        to { opacity: 1; transform: translateY(0); } 
+    }
+    
+    body { 
+        font-family: 'Inter', sans-serif; 
+    }
+    
+    .fade-in { 
+        animation: fadeIn 0.5s ease-out forwards; 
+    }
+
+    /* Input field styling for the light theme */
+    .themed-input {
+        background-color: #F9FAFB !important; /* Very light gray background */
+        color: #1F2937 !important; /* Dark text for readability */
+        border: 1px solid #D1D5DB !important; /* Standard border */
+        transition: all 0.3s ease;
+    }
+    .themed-input::placeholder { 
+        color: #9CA3AF; /* Muted placeholder text */
+    }
+    .themed-input:focus {
+        outline: none !important;
+        /* Focus ring using the primary Lavender color */
+        box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.4); 
+        border-color: #A78BFA !important;
+    }
+</style>
+</head>
+<body class="bg-gray-100 text-gray-800 flex items-center justify-center min-h-screen p-4">
+    <div class="fade-in p-8 bg-white rounded-2xl shadow-lg border border-gray-200 w-full max-w-md text-center">
+        <h1 class="text-3xl font-bold mb-4 text-gray-900">Verify Your Account</h1>
+        <p class="text-gray-600 mb-6">An OTP has been sent to <%= email %>. Please enter it below.</p>
+        <% if (locals.error) { %>
+            <p class="bg-red-100 text-red-700 font-medium p-3 rounded-md mb-4 text-sm"><%= error %></p>
+        <% } %>
+        <form action="/auth/verify" method="POST" class="space-y-4">
+            <input type="hidden" name="email" value="<%= email %>">
+            <input type="text" name="otp" placeholder="------" required class="themed-input w-full p-3 rounded-lg text-center text-2xl tracking-[0.5em]" maxlength="6">
+            <button type="submit" class="w-full p-3 font-bold text-white rounded-lg hover:opacity-90 transition-opacity" style="background-color: #34D399;">Verify</button>
+        </form>
+    </div>
+</body>
+</html>

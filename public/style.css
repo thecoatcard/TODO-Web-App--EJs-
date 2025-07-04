@@ -1,0 +1,164 @@
+/* public/style.css */
+
+/* --- MODERN FONT --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* --- KEYFRAME ANIMATIONS --- */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- BASE STYLES & THEME --- */
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* --- THEMED INPUTS --- */
+.themed-input {
+    background-color: #F9FAFB !important;
+    color: #1F2937 !important;
+    border: 1px solid #D1D5DB !important;
+    transition: all 0.3s ease;
+}
+
+.themed-input::placeholder {
+    color: #9CA3AF;
+}
+
+.themed-input:focus {
+    outline: none !important;
+    box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.4); /* Lavender focus ring */
+    border-color: #A78BFA !important;
+}
+
+/* --- FORM ELEMENTS --- */
+.form-checkbox {
+    color: #A78BFA;
+    border-color: #D1D5DB;
+}
+
+
+
+
+/* public/style.css */
+
+/* --- MODERN FONT --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* --- KEYFRAME ANIMATIONS --- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes popIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+@keyframes toastIn {
+    from { opacity: 0; transform: translateX(100%); }
+    to { opacity: 1; transform: translateX(0); }
+}
+@keyframes toastOut {
+    to { opacity: 0; }
+}
+
+/* --- BASE STYLES & THEME --- */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #F3F4F6;
+}
+.fade-in { animation: fadeIn 0.5s ease-out forwards; }
+.pop-in { animation: popIn 0.4s ease-out backwards; }
+
+/* --- CLEAN UI CARD --- */
+.ui-card {
+    background-color: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s ease;
+}
+.ui-card:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.07), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    transform: translateY(-2px);
+}
+
+/* --- THEMED INPUTS & FORMS --- */
+.themed-input {
+    background-color: #F9FAFB !important;
+    color: #1F2937 !important;
+    border: 1px solid #D1D5DB !important;
+    transition: all 0.3s ease;
+}
+.themed-input::placeholder { color: #9CA3AF; }
+.themed-input:focus {
+    outline: none !important;
+    box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.4);
+    border-color: #A78BFA !important;
+}
+.form-checkbox {
+    color: #A78BFA;
+    border-color: #D1D5DB;
+}
+
+/* --- CUSTOM SCROLLBAR --- */
+.tasks::-webkit-scrollbar { width: 6px; }
+.tasks::-webkit-scrollbar-track { background: #E5E7EB; }
+.tasks::-webkit-scrollbar-thumb {
+    background-color: #A78BFA;
+    border-radius: 6px;
+}
+
+/* --- LIGHT THEME FOR FLATPICKR --- */
+.flatpickr-calendar {
+    font-family: 'Inter', sans-serif;
+    background: #ffffff;
+    border: 1px solid #D1D5DB;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.3s ease-out;
+}
+.flatpickr-months, .flatpickr-weekday { color: #4B5563; }
+.flatpickr-current-month {
+    color: #111827;
+    font-weight: 500;
+}
+.flatpickr-months .flatpickr-prev-month svg,
+.flatpickr-months .flatpickr-next-month svg {
+    fill: #6B7280;
+    transition: fill 0.2s ease;
+}
+.flatpickr-months .flatpickr-prev-month:hover svg,
+.flatpickr-months .flatpickr-next-month:hover svg {
+    fill: #A78BFA;
+}
+.flatpickr-day {
+    color: #374151;
+    border: none;
+    border-radius: 6px;
+    transition: all 0.2s ease-in-out;
+}
+.flatpickr-day.today { border: 1px solid #A78BFA; }
+.flatpickr-day:hover, .flatpickr-day:focus {
+    background: #E5E7EB;
+    color: #111827;
+}
+.flatpickr-day.selected, .flatpickr-day.startRange, .flatpickr-day.endRange {
+    background: #A78BFA;
+    color: #ffffff;
+    border-color: #A78BFA;
+}
+.flatpickr-day.disabled, .flatpickr-day.prevMonthDay, .flatpickr-day.nextMonthDay {
+    color: #D1D5DB;
+}

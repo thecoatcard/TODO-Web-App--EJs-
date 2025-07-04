@@ -1,0 +1,65 @@
+<div class="p-6 h-full ui-card">
+    <h2 class="text-2xl font-bold text-gray-900 mb-4">Task List</h2>
+    <div class="tasks space-y-4 max-h-[85vh] overflow-y-auto pr-2">
+        <% if (tasks.length === 0) { %>
+            <div class="text-center py-10 px-6">
+                <h3 class="text-lg font-semibold text-gray-800">All Clear!</h3>
+                <p class="text-gray-500 mt-2">You have no pending tasks.</p>
+            </div>
+        <% } else { %>
+            <% tasks.forEach((task, index) => {
+                const deadline = new Date(task.deadline);
+                const isCompleted = task.status === 'Completed';
+                const isOverdue = new Date() > deadline && !isCompleted;
+                const today = new Date(); today.setHours(0,0,0,0);
+                const tomorrow = new Date(today); tomorrow.setDate(today.getDate() + 1);
+                const taskDeadline = new Date(task.deadline); taskDeadline.setHours(0,0,0,0);
+                const isDueTomorrow = !isCompleted && taskDeadline.getTime() === tomorrow.getTime();
+            %>
+            <div class="pop-in p-4 bg-white rounded-lg border-l-4 transition-all duration-300
+                <% if(isOverdue) { %> border-[#F87171] <% }
+                else if(isCompleted) { %> border-[#34D399] opacity-70 <% }
+                else if(isDueTomorrow) { %> border-[#FCD34D] <% }
+                else { %> border-[#A78BFA] <% } %>"
+                style="animation-delay: <%= index * 50 %>ms; box-shadow: 0 1px 3px 0 rgba(0,0,0,0.05);">
+
+                <div class="flex justify-between items-start gap-2">
+                    <h3 class="font-semibold text-gray-800 <% if(isCompleted) { %> line-through <% } %>">
+                        <%= task.title %>
+                    </h3>
+                    <p class="text-xs font-medium flex-shrink-0 <% if(isOverdue) { %> text-red-500 <% } else { %> text-gray-500 <% } %>">
+                        <%= deadline.toLocaleDateString('en-US', { month: 'short' , day: 'numeric' }) %>
+                    </p>
+                </div>
+                
+                <% if(isDueTomorrow) { %>
+                    <div class="mt-2 text-xs font-bold text-amber-600 flex items-center gap-1.5">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" style="color: #FCD34D;">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.414-1.415L11 9.586V6z" clip-rule="evenodd" />
+                        </svg>
+                        <span>Due Tomorrow</span>
+                    </div>
+                <% } %>
+
+                <div class="flex items-center justify-between gap-2 mt-4">
+                    <form action="/status/<%= task._id %>" method="post">
+                        <button type="submit"
+                            class="flex items-center gap-2 text-xs font-bold py-2 px-3 rounded-md transition-all 
+                            <% if(isCompleted) { %> bg-yellow-100 text-yellow-800 hover:bg-yellow-200 <% } 
+                            else { %> bg-green-100 text-green-800 hover:bg-green-200 <% } %>">
+                            <% if(isCompleted) { %><span>Undo</span><% } else { %><svg
+                                    xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                                </svg><span>Mark as Done</span><% } %>
+                        </button>
+                    </form>
+                    <div class="flex items-center gap-3">
+                        <a href="/task/<%= task._id %>" class="text-xs font-semibold text-gray-500 hover:text-purple-600 transition">Details</a>
+                        <a href="/delete/<%= task._id %>" class="text-gray-400 hover:text-red-500 transition" title="Delete Task">&#10005;</a>
+                    </div>
+                </div>
+            </div>
+            <% }) %>
+        <% } %>
+    </div>
+</div>

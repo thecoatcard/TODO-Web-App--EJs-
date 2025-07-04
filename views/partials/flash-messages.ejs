@@ -1,0 +1,17 @@
+<% if (locals.success && locals.success.length > 0) { %>
+    <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-100 border border-green-200" role="alert">
+      <span class="font-medium">Success!</span> <%= locals.success %>
+    </div>
+<% } %>
+
+<% if (locals.error && locals.error.length > 0) { %>
+    <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-100 border border-red-200" role="alert">
+      <span class="font-medium">Error!</span> <%= locals.error %>
+    </div>
+<% } %>
+
+<% if (locals.info && locals.info.length > 0) { %>
+    <div class="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-100 border border-blue-200" role="alert">
+      <span class="font-medium">Info:</span> <%= locals.info %>
+    </div>
+<% } %>
