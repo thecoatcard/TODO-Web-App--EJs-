@@ -5,7 +5,7 @@ const path = require('path');
 const session = require('express-session');
 const passport = require('passport');
 const flash = require('connect-flash');
-const helmet = require('helmet'); // 1. Import helmet
+const helmet = require('helmet');
 require('dotenv').config();
 
 const connectDB = require('./config/database');
@@ -23,7 +23,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // --- Security Middleware ---
-// 2. Add the Content Security Policy configuration
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
@@ -31,11 +30,11 @@ app.use(
       "script-src": [
         "'self'", 
         "https://cdn.tailwindcss.com", 
-        "https://cdn.jsdelivr.net"      // <-- This line is required for Flatpickr JS
+        "https://cdn.jsdelivr.net"
       ],
       "style-src": [
         "'self'", 
-        "https://cdn.jsdelivr.net",      // <-- This line is required for Flatpickr CSS
+        "https://cdn.jsdelivr.net", 
         "https://fonts.googleapis.com", 
         "'unsafe-inline'"
       ],
@@ -75,11 +74,16 @@ app.use('/auth', require('./routes/auth'));
 app.use(notFound);
 app.use(errorHandler);
 
-// --- Start Server and Scheduler ---
-// const PORT = process.env.PORT || 3000;
-// app.listen(PORT, () => {
-//     console.log(`Server running on http://localhost:${PORT}`);
-//     startScheduler(); // Initialize the scheduled job
-// });
+// --- Start Server (for local development) ---
+// This block allows the server to run locally but will be ignored by Vercel
+if (process.env.NODE_ENV !== 'production') {
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => {
+        console.log(`Server running on http://localhost:${PORT}`);
+        // The scheduler runs locally but should be disabled for Vercel
+        startScheduler(); 
+    });
+}
 
+// Export the app for Vercel
 module.exports = app;
