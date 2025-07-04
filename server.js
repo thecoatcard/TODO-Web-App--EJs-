@@ -1,4 +1,4 @@
-// app.js
+// server.js
 
 const express = require('express');
 const path = require('path');
@@ -14,6 +14,7 @@ const { notFound, errorHandler } = require('./middleware/errorMiddleware');
 
 // --- Initial Setup ---
 const app = express();
+app.set('trust proxy', 1); // <-- ADD THIS LINE
 connectDB(); // Connect to MongoDB
 require('./config/passport-setup'); // Configure Passport strategies
 
@@ -75,12 +76,10 @@ app.use(notFound);
 app.use(errorHandler);
 
 // --- Start Server (for local development) ---
-// This block allows the server to run locally but will be ignored by Vercel
 if (process.env.NODE_ENV !== 'production') {
     const PORT = process.env.PORT || 3000;
     app.listen(PORT, () => {
         console.log(`Server running on http://localhost:${PORT}`);
-        // The scheduler runs locally but should be disabled for Vercel
         startScheduler(); 
     });
 }
