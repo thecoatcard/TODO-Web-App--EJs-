@@ -3,25 +3,20 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>404 - Not Found</title>
+    <title>Error</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-      body { font-family: 'Inter', sans-serif; }
-    </style>
+    <link rel="stylesheet" href="/style.css">
 </head>
-<body class="bg-gray-100 text-gray-800">
-    <div class="min-h-screen flex items-center justify-center text-center px-4">
-        <div class="p-12 bg-white rounded-2xl shadow-lg border border-gray-200 max-w-md w-full">
-            <h1 class="text-9xl font-bold" style="color: #A78BFA;">404</h1>
-            <h2 class="text-3xl font-bold text-gray-900 mt-4">Page Not Found</h2>
-            <p class="text-gray-500 mt-2 mb-8">The page you're looking for doesn't exist or has been moved.</p>
-            <a href="/" 
-               style="background-color: #A78BFA;"
-               class="inline-block font-bold text-white py-3 px-8 rounded-lg hover:opacity-90 transition-all transform hover:scale-105">
-                Go to Dashboard
-            </a>
-        </div>
+<body class="bg-gray-100 text-gray-800 flex items-center justify-center min-h-screen px-4">
+    <div class="w-full max-w-lg mx-auto p-8 bg-white rounded-2xl shadow-lg border border-gray-200 text-center">
+        <h1 class="text-6xl font-bold mb-4" style="color: #F87171;">Oops!</h1>
+        <h2 class="text-2xl font-bold text-gray-900 mt-4">An Error Occurred</h2>
+        <p class="text-gray-500 mt-2 mb-8"><%= message %></p>
+        <a href="/" 
+           style="background-color: #A78BFA;"
+           class="inline-block font-bold text-white py-3 px-8 rounded-lg hover:opacity-90 transition-all">
+            Go to Dashboard
+        </a>
     </div>
 </body>
 </html>

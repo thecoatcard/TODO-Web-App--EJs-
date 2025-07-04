@@ -23,7 +23,8 @@ passport.deserializeUser(async (id, done) => {
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: '/auth/google/callback' // For production, use process.env.APP_URL + '/auth/google/callback'
+    // Use the full, dynamic URL for production
+    callbackURL: `${process.env.APP_URL}/auth/google/callback`
 }, async (accessToken, refreshToken, profile, done) => {
     try {
         const existingUserByGoogleId = await User.findOne({ googleId: profile.id });
