@@ -14,13 +14,7 @@
   ],
   "functions": {
     "server.js": {
-      "includeFiles": [
-        "views/**",
-        "public/**",
-        "config/**",
-        "models/**",
-        "services/**"
-      ]
+      "includeFiles": "{views/**,public/**,config/**,models/**,services/**}"
     }
   }
 }
